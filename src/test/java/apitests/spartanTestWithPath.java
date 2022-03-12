@@ -6,9 +6,11 @@ import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class spartanTestWithPath {
 
@@ -61,7 +63,52 @@ public class spartanTestWithPath {
         assertEquals(idJson, 11);
         assertEquals(nameJson, "Nona");
         assertEquals(gender, "Female");
-        assertEquals(phone, 7959094216l);
+        assertEquals(phone, 7959094216L);
+
+    }
+
+    @Test
+    public void getAllSpartanWithPath(){
+        Response response = given().accept(ContentType.JSON)
+                .when().get("/api/spartans");
+
+
+        assertEquals(response.statusCode(),200);
+
+        //verify content type
+        assertEquals(response.getHeader("Content-Type"),"application/json");
+
+       // System.out.println(response.path("id[0]").toString()); //index [0]--get brings the 1st element
+
+        int firstId = response.path("id[0]");
+        System.out.println("firstId = " + firstId);
+
+        String firstname = response.path("name[0]");
+        System.out.println("firstname = " + firstname);
+
+        String lastname = response.path("lastname[0]");
+        System.out.println("lastname = " + lastname);
+
+        int lastid = response.path("id[-1]");
+        System.out.println("lastid = " + lastid);
+
+
+    //HOW WE GONNA GET ALL IN A ONE SHOT ?
+        // print all spartans
+        //if you have more than one string --> we gonna use List OF STRING for getting all the elements of array.
+
+        List<String> names= response.path("name");
+        System.out.println("names = " + names);
+
+        List<String>genders = response.path("gender");
+        System.out.println("genders = " + genders);
+
+        List<Object>phones = response.path("phone");
+        for (Object phone : phones) {
+            System.out.println("phones = " + phones);
+
+        }
+
 
     }
 

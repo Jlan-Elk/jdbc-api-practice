@@ -50,7 +50,5 @@ public class hrApiParameterTests {
         Assert.assertEquals(response.contentType(),"application/json");
         assertTrue(response.body().asString().contains("IT_PROG"));
 
-
-
     }
 }
