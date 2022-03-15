@@ -10,7 +10,7 @@ public class Main {
         String dbUsername ="hr";
         String dbPassword = "hr";
 
-       //create connection
+        //create connection
         Connection connection = DriverManager.getConnection(dbUrl,dbUsername,dbPassword);
 
         //create statement object
