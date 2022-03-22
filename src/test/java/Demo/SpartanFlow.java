@@ -25,7 +25,7 @@ public class SpartanFlow {
     public void POSTNewSpartan(){
 
     }
-    @Test
+    @Test(priority = 2)
     public void PUTExistingNewSpartan(){
 
     }
